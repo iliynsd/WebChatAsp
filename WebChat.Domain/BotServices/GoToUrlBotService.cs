@@ -8,6 +8,7 @@ namespace WebChat.Domain.BotServices
 {
     class GoToUrlBotService : IGoToUrlBotService
     {
+        private const string BotUploaderName = "BotUploader";
         private IChatRepository _chats;
         private IUserRepository _users;
 
@@ -17,9 +18,9 @@ namespace WebChat.Domain.BotServices
             _users = users;
         }
 
-        public async Task GoToUrl(string botName, int chatId, string url)
+        public async Task GoToUrl(int chatId, string url)
         {
-            var bot = await _users.Get(botName);
+            var bot = await _users.Get(BotUploaderName);
             var chat = await _chats.GetChatById(chatId);
 
             //проверить находится ли бот в данном чате

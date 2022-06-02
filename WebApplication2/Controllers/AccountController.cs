@@ -1,31 +1,51 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebChat.Domain.Models;
-
+using WebChat.Domain.Services;
 
 namespace WebChat.Controllers
 {
 
     public class AccountController: Controller
     {
-        public IActionResult LogIn([FromBody] LoginModel model)
-        {
-            
-            //find user
+        private IUserService _userService;
 
+        public AccountController(IUserService userService)
+        {
+            _userService = userService;
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> LogIn([FromBody] LoginModel model)
+        {
+            var authenticateResponse = await _userService.Authenticate(model);
+
+            if (authenticateResponse is null)
+            {
+                return BadRequest("Can't login");
+            }
             
-            return Ok("ed");
+            return Ok(authenticateResponse);
         }
 
-        public IActionResult Register()
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] LoginModel model)
         {
-            return Ok("req");
+            var registrationResponse = await _userService.Register(model);
+            if (registrationResponse is null)
+            {
+                return BadRequest("Can't register");
+            }
+            return Ok(registrationResponse);
         }
 
-        [Authorize]
-        public IActionResult LogOut()
+        public IActionResult Do()
         {
-            return Ok();
+            
+            return Ok("dce");
         }
     }
 }

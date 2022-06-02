@@ -27,7 +27,7 @@ namespace WebChat.Domain.BotServices
             //проверить находится ли бот в чате
                 var message = new Message(bot.Id, chat.Id, answer);
                 await _messages.Add(message);
-                var action = new ChatAction(ChatActions.UserAddMessage(botName, chat.Name, answer));
+                var action = new ChatAction(ChatActions.UserAddMessage(bot.Name, chat.Name, answer));
                 await _chatActions.Add(action);
             
 

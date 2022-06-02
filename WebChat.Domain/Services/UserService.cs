@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebChat.DAL.Entities;
 using WebChat.DAL.Repositories;
@@ -25,13 +21,18 @@ namespace WebChat.Domain.Services
         }
         public async Task<AuthenticateResponse> Authenticate(LoginModel model)
         {
-            var user = await _userRepository.Get(model.Email);
+            var user = await _userRepository.Get(model.UserName);
+            
             if (user == null)
             {
-                //add logger
                 return null;
             }
 
+            if (user.Password != model.Password)
+            {
+                return null;
+            }
+            
             var token = _identityService.GenerateJwtToken(user);
             return _mapper.Map<AuthenticateResponse>((user, token));
         }

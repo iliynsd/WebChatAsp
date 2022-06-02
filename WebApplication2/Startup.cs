@@ -31,7 +31,7 @@ namespace WebChat
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication("OAuth").AddJwtBearer("OAuth", config => 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(config => 
             {
                 byte[] secretBytes = Encoding.UTF8.GetBytes("my_secret_key");//authOptions
 
@@ -47,8 +47,12 @@ namespace WebChat
             services.AddCors();
             services.AddAuthorization();
             services.AddControllers();
-             
-            services.AddDbContext<DataContext>(o => o.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                    a => a.MigrationsAssembly("WebChat.DAL"));
+            });
             services.AddAutoMapper(typeof(UserProfile));
 
             services.Configure<AuthOptions>(Configuration.GetSection(AuthOptions.Authorization).Bind);

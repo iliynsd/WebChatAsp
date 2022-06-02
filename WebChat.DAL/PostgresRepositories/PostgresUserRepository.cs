@@ -19,11 +19,9 @@ namespace WebChat.DAL.PostgresRepositories
 
         public async Task Delete(User user) => (await _dataContext.Users.FirstOrDefaultAsync(i => i.Id == user.Id)).IsActive = false;
 
-        public async Task<User> Get(string email) => await _dataContext.Users.FirstOrDefaultAsync(i => i.Email == email);
+        public async Task<User> Get(string userName) => await _dataContext.Users.FirstOrDefaultAsync(i => i.Name == userName);
 
         public IQueryable<User> GetAll() => _dataContext.Users.AsQueryable();
-
-        public async Task<User> GetById(int userId) => await _dataContext.Users.FirstOrDefaultAsync(i => i.Id == userId);
 
         public async Task SaveChangesAsync() => await _dataContext.SaveChangesAsync();
     }

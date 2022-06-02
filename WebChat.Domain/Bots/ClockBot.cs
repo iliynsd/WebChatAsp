@@ -9,7 +9,7 @@ namespace WebChat.Domain.Bots
 {
     public class ClockBot : IMessageBot
     {
-        public const string Name = "ClockBot";
+        private const string Name = "ClockBot";
         private readonly IMessageBotService _messageService;
         private readonly IChatActionBotService _chatActionService;
         private Dictionary<string, Func<string>> _botCommands;
@@ -28,7 +28,6 @@ namespace WebChat.Domain.Bots
 
         public Task OnMessage(Message message)
         {
-
             if (_botCommands.ContainsKey(message.Text))
             {
                 Thread.Sleep(12000);

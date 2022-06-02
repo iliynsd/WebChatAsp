@@ -4,6 +4,6 @@ namespace WebChat.Domain.BotServices
 {
     public interface IGoToUrlBotService
     {
-        public Task GoToUrl(string botName, int chatId, string url);
+        public Task GoToUrl(int chatId, string url);
     }
 }

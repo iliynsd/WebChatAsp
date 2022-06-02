@@ -8,7 +8,7 @@ namespace WebChat.Domain.MapperConfiguration
     {
         public UserProfile()
         { 
-            CreateMap<(User user, string token), AuthenticateResponse>().ForMember(resp => resp.Email, opt => opt.MapFrom(data => data.user.Email)).ForMember(resp => resp.Name, opt => opt.MapFrom(data => data.user.Name)).ForMember(resp => resp.Token, opt => opt.MapFrom(data => data.token));
+            CreateMap<(User user, string token), AuthenticateResponse>().ForMember(resp => resp.Name, opt => opt.MapFrom(data => data.user.Name)).ForMember(resp => resp.Token, opt => opt.MapFrom(data => data.token));
             CreateMap<LoginModel, User>();
         }
     }

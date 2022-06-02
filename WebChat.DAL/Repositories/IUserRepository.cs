@@ -10,7 +10,6 @@ namespace WebChat.DAL.Repositories
         public Task Add(User user);
         public Task Delete(User user);
         public Task<User> Get(string email);
-        public Task<User> GetById(int userId);
         public IQueryable<User> GetAll();
         public Task SaveChangesAsync();
     }
