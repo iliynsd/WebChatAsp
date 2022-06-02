@@ -345,6 +345,14 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+
+workspace.xml
+vcs.xml
+.name
+encodings.xml
+indexLayout.xml
+projectSettingsUpdater.xml
+
 # OpenCover UI analysis results
 OpenCover/
 
