@@ -51,7 +51,7 @@ namespace WebChat
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
-                    a => a.MigrationsAssembly("WebChat.DAL"));
+                    a => a.MigrationsAssembly("WebChat.DAL.Migrations"));
             });
             services.AddAutoMapper(typeof(UserProfile));
 

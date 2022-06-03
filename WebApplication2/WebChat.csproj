@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebChat.Domain\WebChat.Domain.csproj" />
-    
+    <ProjectReference Include="..\WebChat.DAL.Migrations\WebChat.DAL.Migrations.csproj"/>
   </ItemGroup>
 
   <ItemGroup>

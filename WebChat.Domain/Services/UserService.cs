@@ -41,8 +41,10 @@ namespace WebChat.Domain.Services
         {
             var user = _mapper.Map<User>(model);
             await _userRepository.Add(user);
-            var authenticateResponse =  await Authenticate(model);
-            return authenticateResponse;
+            await _userRepository.SaveChangesAsync();
+
+            var token = _identityService.GenerateJwtToken(user);
+            return _mapper.Map<AuthenticateResponse>((user, token));
         }
     }
 }

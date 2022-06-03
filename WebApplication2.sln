@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebChat.DAL", "WebChat.DAL\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebChat.Domain", "WebChat.Domain\WebChat.Domain.csproj", "{72AAB7F8-E126-47E6-B6B5-593090D42D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChat.IdentityServer", "WebChat.IdentityServer\WebChat.IdentityServer.csproj", "{63E4E6F4-9E90-460D-91C3-6B32CE4E9C4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebChat.IdentityServer", "WebChat.IdentityServer\WebChat.IdentityServer.csproj", "{63E4E6F4-9E90-460D-91C3-6B32CE4E9C4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebChat.DAL.Migrations", "WebChat.DAL.Migrations\WebChat.DAL.Migrations.csproj", "{1AA776BA-ACB4-40A8-BB8F-99DE22BEF7D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{63E4E6F4-9E90-460D-91C3-6B32CE4E9C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63E4E6F4-9E90-460D-91C3-6B32CE4E9C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63E4E6F4-9E90-460D-91C3-6B32CE4E9C4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AA776BA-ACB4-40A8-BB8F-99DE22BEF7D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA776BA-ACB4-40A8-BB8F-99DE22BEF7D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA776BA-ACB4-40A8-BB8F-99DE22BEF7D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA776BA-ACB4-40A8-BB8F-99DE22BEF7D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

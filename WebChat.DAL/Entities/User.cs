@@ -9,6 +9,10 @@ namespace WebChat.DAL.Entities
         public bool IsActive { get; set; }
         public string Role { get; set; }
 
+        public User()
+        {
+                
+        }
         public User(string name, string type)
         {
             Name = name;
