@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebChat.Domain.Models;
-using WebChat.Domain.Services;
+using WebChat.Domain.AuthenticationModels;
+using WebChat.Domain.UserServices;
 
 namespace WebChat.Controllers
 {
@@ -40,12 +40,6 @@ namespace WebChat.Controllers
                 return BadRequest("Can't register");
             }
             return Ok(registrationResponse);
-        }
-
-        public IActionResult Do()
-        {
-            
-            return Ok("dce");
         }
     }
 }

@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using WebChat.DAL.Entities;
 
-namespace WebChat.IdentityServer
+namespace WebChat.Domain.ChatModels
 {
-    public interface IIdentityService
+    public class CreateChatModel
     {
-        public string GenerateJwtToken(User user);
+        public string Name { get; set; }
+        public int UserId { get; set; }
     }
 }

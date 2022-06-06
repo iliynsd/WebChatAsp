@@ -17,6 +17,7 @@ namespace WebChat.DAL.PostgresRepositories
         {
             _dataContext = dataContext;
         }
+
         public async Task Add(ChatUser chatUser) => await _dataContext.ChatUser.AddAsync(chatUser);
 
         public async Task Delete(int id) 
@@ -24,6 +25,12 @@ namespace WebChat.DAL.PostgresRepositories
             var chatUser = await _dataContext.ChatUser.FirstOrDefaultAsync(x => x.Id == id);
             await Task.Run(() => _dataContext.ChatUser.Remove(chatUser));
         }
+
+        public async Task Delete(ChatUser chatUser) => await Task.Run(() => _dataContext.ChatUser.Remove(chatUser));
+
+        public async Task DeleteChat(IEnumerable<ChatUser> chatUsers) => await Task.Run(() => _dataContext.ChatUser.RemoveRange(chatUsers));
+        
+        public IQueryable<ChatUser> GetAll(Func<ChatUser, bool> func) => _dataContext.ChatUser.Where(func).AsQueryable();
 
         public IQueryable<ChatUser> GetAll() => _dataContext.ChatUser.AsQueryable();
 

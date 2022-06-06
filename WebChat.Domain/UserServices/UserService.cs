@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using WebChat.DAL.Entities;
 using WebChat.DAL.Repositories;
-using WebChat.Domain.Models;
+using WebChat.Domain.AuthenticationModels;
 using WebChat.IdentityServer;
 
-namespace WebChat.Domain.Services
+namespace WebChat.Domain.UserServices
 {
     public class UserService : IUserService
     {
@@ -19,6 +19,7 @@ namespace WebChat.Domain.Services
             _identityService = identityService;
             _mapper = mapper;
         }
+
         public async Task<AuthenticateResponse> Authenticate(LoginModel model)
         {
             var user = await _userRepository.Get(model.UserName);
