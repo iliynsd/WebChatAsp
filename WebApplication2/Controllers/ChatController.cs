@@ -19,9 +19,35 @@ namespace WebChat.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateChatModel model)
         {
-
-            var createChatResponse = await _chatService.Create(model);
+            await _chatService.Create(model);
             return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveUser([FromBody] RemoveUserFromChatModel model)
+        {
+            await _chatService.RemoveUserFromChat(model);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] int chatId)
+        {
+            await _chatService.Delete(chatId);
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUser([FromBody] AddUserToChatModel model)
+        {
+            await _chatService.AddUser(model);
+            return Ok();
+        }
+
+        public async Task<IActionResult> Get([FromBody] int userId)
+        {
+            var chats = await _chatService.GetUserChats(userId);
+            return Ok(chats);
         }
     }
 }

@@ -13,5 +13,6 @@ namespace WebChat.Domain.ChatService
         public Task Delete(int chatId);
         public Task AddUser(AddUserToChatModel model);
         public Task RemoveUserFromChat(RemoveUserFromChatModel model);
+        public Task<IEnumerable<string>> GetUserChats(int userId);
     }
 }
