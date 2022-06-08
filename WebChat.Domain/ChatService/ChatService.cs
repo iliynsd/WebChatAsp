@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +8,6 @@ using WebChat.Domain.ChatModels;
 
 namespace WebChat.Domain.ChatService
 {
-    [Authorize]
     public class ChatService : IChatService
     {
         private IChatRepository _chatRepository;
@@ -51,15 +49,15 @@ namespace WebChat.Domain.ChatService
 
         public async Task RemoveUserFromChat(RemoveUserFromChatModel model)
         {
-            var chatUser = _mapper.Map<ChatUser>(model);
-            await _chatUserRepository.Delete(chatUser);
+            var chatUser = await _chatUserRepository.Find(x => x.UserId == model.UserId && x.ChatId == model.ChatId);
+            await _chatUserRepository.Delete(chatUser.Id);
             await _chatUserRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<string>> GetUserChats(int userId)
         {
-            var userChats = await Task.FromResult(_chatUserRepository.GetAll(x => x.UserId == userId).Select(i => i.ChatId));
-            return await Task.FromResult(_chatRepository.GetAll().Where(i => userChats.Contains(i.Id)).Select(i => i.Name));
+            var userChats = await Task.FromResult(_chatUserRepository.GetAll(x => x.UserId == userId).Select(i => i.ChatId).ToList());
+            return await Task.FromResult(_chatRepository.GetAll().Where(i => userChats.Contains(i.Id)).Select(i => i.Name).ToList());
         }
     } 
 }

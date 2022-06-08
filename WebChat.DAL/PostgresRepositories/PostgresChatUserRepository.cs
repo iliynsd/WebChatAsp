@@ -26,6 +26,8 @@ namespace WebChat.DAL.PostgresRepositories
             await Task.Run(() => _dataContext.ChatUser.Remove(chatUser));
         }
 
+        public async Task<ChatUser> Find(Func<ChatUser, bool> func) => await Task.Run(() => _dataContext.ChatUser.Where(func).FirstOrDefault());
+
         public async Task Delete(ChatUser chatUser) => await Task.Run(() => _dataContext.ChatUser.Remove(chatUser));
 
         public async Task DeleteChat(IEnumerable<ChatUser> chatUsers) => await Task.Run(() => _dataContext.ChatUser.RemoveRange(chatUsers));

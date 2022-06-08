@@ -14,6 +14,7 @@ using WebChat.DAL.PostgresRepositories;
 using WebChat.DAL.Repositories;
 using WebChat.Domain.ChatService;
 using WebChat.Domain.MapperConfiguration;
+using WebChat.Domain.MessageServices;
 using WebChat.Domain.UserServices;
 using WebChat.IdentityServer;
 using WebChat.IdentityServer.Options;
@@ -45,6 +46,7 @@ namespace WebChat
                     IssuerSigningKey = key
                 };
             });
+
             services.AddCors();
             services.AddAuthorization();
             services.AddControllers();
@@ -54,15 +56,17 @@ namespace WebChat
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     a => a.MigrationsAssembly("WebChat.DAL.Migrations"));
             });
-            services.AddAutoMapper(typeof(UserProfile), typeof(ChatProfile));
+            services.AddAutoMapper(typeof(UserProfile), typeof(ChatProfile), typeof(MessageProfile));
 
             services.Configure<AuthOptions>(Configuration.GetSection(AuthOptions.Authorization).Bind);
             services.AddTransient<IMessageRepository, PostgresMessageRepository>();
             services.AddTransient<IChatRepository, PostgresChatRepository>();
+            services.AddTransient<IChatUserRepository, PostgresChatUserRepository>();
             services.AddTransient<IUserRepository, PostgresUserRepository>();
             services.AddTransient<IChatActionsRepository, PostgresChatActionsRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IChatService, ChatService>();
+            services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IIdentityService, IdentityService>();
         }
 

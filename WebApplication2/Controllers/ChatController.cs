@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,11 @@ using WebChat.Domain.ChatService;
 
 namespace WebChat.Controllers
 {
+    
     public class ChatController : Controller
     {
         private IChatService _chatService;
+
         public ChatController(IChatService chatService)
         {
             _chatService = chatService;
@@ -31,7 +34,7 @@ namespace WebChat.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] int chatId)
+        public async Task<IActionResult> Delete(int chatId)
         {
             await _chatService.Delete(chatId);
             return Ok();
@@ -44,7 +47,8 @@ namespace WebChat.Controllers
             return Ok();
         }
 
-        public async Task<IActionResult> Get([FromBody] int userId)
+        [HttpGet]
+        public async Task<IActionResult> Get(int userId)
         {
             var chats = await _chatService.GetUserChats(userId);
             return Ok(chats);

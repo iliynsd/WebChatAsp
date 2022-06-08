@@ -15,6 +15,7 @@ namespace WebChat.DAL.Repositories
         public Task DeleteChat(IEnumerable<ChatUser> chatUsers);
         public IQueryable<ChatUser> GetAll(Func<ChatUser, bool> func);
         public IQueryable<ChatUser> GetAll();
+        public Task<ChatUser> Find(Func<ChatUser, bool> func);
         public Task SaveChangesAsync();
     }
 }

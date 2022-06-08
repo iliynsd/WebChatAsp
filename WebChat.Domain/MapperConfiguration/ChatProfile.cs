@@ -16,7 +16,6 @@ namespace WebChat.Domain.MapperConfiguration
             CreateMap<CreateChatModel, Chat>().ForMember(c => c.Id, opt => opt.Ignore()).ForMember(c => c.Name, opt => opt.MapFrom(m => m.Name)).ForMember(c => c.IsActive, opt => opt.MapFrom(m => bool.TrueString));
             CreateMap<(CreateChatModel model, int chatId), ChatUser>().ForMember(c => c.UserId, opt => opt.MapFrom(data => data.model.UserId)).ForMember(c => c.ChatId, opt => opt.MapFrom(data => data.chatId));
             CreateMap<AddUserToChatModel, ChatUser>();
-            CreateMap<RemoveUserFromChatModel, ChatUser>();
         }
     }
 }

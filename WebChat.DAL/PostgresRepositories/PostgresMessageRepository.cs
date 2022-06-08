@@ -17,12 +17,14 @@ namespace WebChat.DAL.PostgresRepositories
 
         public async Task Add(Message message) => await _dataContext.Messages.AddAsync(message);
 
-        public async Task Delete(Message message) => (await _dataContext.Messages.FirstOrDefaultAsync(i => i.Id == message.Id)).IsActive = false;
+        public async Task Delete(int messageId) => (await _dataContext.Messages.FirstOrDefaultAsync(i => i.Id == messageId)).IsActive = false;
         
         public IQueryable<Message> GetAll() => _dataContext.Messages.Where(i => i.IsActive).AsQueryable();
 
-        public IQueryable<Message> GetChatMessages(Chat chat) => _dataContext.Messages.Where(i => i.IsActive).Where(i => i.ChatId == chat.Id).AsQueryable();
+        public IQueryable<Message> GetChatMessages(int chatId) => _dataContext.Messages.Where(i => i.IsActive).Where(i => i.ChatId == chatId).AsQueryable();
 
         public async Task SaveChangesAsync() => await _dataContext.SaveChangesAsync();
+
+        public async Task Update(Message message) => await Task.Run(() => _dataContext.Update(message));
     }
 }
