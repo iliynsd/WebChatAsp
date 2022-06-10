@@ -11,7 +11,7 @@ namespace WebChat.DAL.Entities
 
         public User()
         {
-                
+
         }
         public User(string name, string type)
         {

@@ -10,7 +10,7 @@ namespace WebChat.DAL.Repositories
         public Task Delete(int messageId);
         public IQueryable<Message> GetAll();
         public Task SaveChangesAsync();
-        public Task Update(Message message);  
+        public Task Update(Message message);
         public IQueryable<Message> GetChatMessages(int chatId);
     }
 }

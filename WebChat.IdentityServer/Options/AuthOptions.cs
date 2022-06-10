@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebChat.IdentityServer.Options
+﻿namespace WebChat.IdentityServer.Options
 {
     public class AuthOptions
     {

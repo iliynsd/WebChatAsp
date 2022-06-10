@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebChat.Domain\WebChat.Domain.csproj" />
-    <ProjectReference Include="..\WebChat.DAL.Migrations\WebChat.DAL.Migrations.csproj"/>
+    <ProjectReference Include="..\WebChat.DAL.Migrations\WebChat.DAL.Migrations.csproj" />
+    <ProjectReference Include="..\WebChat.Extensions\WebChat.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,6 +15,6 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17" />
   </ItemGroup>
 </Project>

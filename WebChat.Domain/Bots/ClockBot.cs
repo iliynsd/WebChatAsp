@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using WebChat.DAL.Entities;
 using WebChat.Domain.BotServices;
@@ -11,10 +10,9 @@ namespace WebChat.Domain.Bots
     {
         private const string Name = "ClockBot";
         private readonly IMessageBotService _messageService;
-        private readonly IChatActionBotService _chatActionService;
         private Dictionary<string, Func<string>> _botCommands;
 
-        public ClockBot(IMessageBotService messageService, IChatActionBotService chatActionService)
+        public ClockBot(IMessageBotService messageService)
         {
             _botCommands = new Dictionary<string, Func<string>>()
              {
@@ -23,19 +21,15 @@ namespace WebChat.Domain.Bots
                  {"clockbot", () => DateTime.Now.ToString()}
              };
             _messageService = messageService;
-            _chatActionService = chatActionService;
         }
 
-        public Task OnMessage(Message message)
+        public async Task OnMessage(Message message)
         {
             if (_botCommands.ContainsKey(message.Text))
             {
-                Thread.Sleep(12000);
                 var botAnswer = _botCommands[message.Text]?.Invoke();
-                _messageService.AddMessage(Name, message.ChatId, botAnswer);
-                _chatActionService.AddChatAction(Name, message.ChatId, botAnswer);
+                await _messageService.AddMessage(Name, message.ChatId, botAnswer);
             }
-            return Task.CompletedTask;
         }
     }
 }

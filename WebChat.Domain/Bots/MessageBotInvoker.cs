@@ -7,16 +7,17 @@ namespace WebChat.Domain.Bots
 {
     public class MessageBotInvoker : BaseBot<IMessageBot, Message>
     {
+        BotOptions botOptions;
         public MessageBotInvoker(IOptions<BotOptions> options) : base(options)
         {
-
+            botOptions = options.Value;
         }
 
-        public override Task Invoke(IEnumerable<IMessageBot> bots, Message message)
+        public override async Task Invoke(IEnumerable<IMessageBot> bots, Message message)
         {
             foreach (var bot in bots)
             {
-                var task = new Task(async () =>
+                await Task.Run(async () =>
                 {
                     await semaphore.WaitAsync();
                     try
@@ -28,11 +29,7 @@ namespace WebChat.Domain.Bots
                         semaphore.Release();
                     }
                 });
-
-                task.Start();
             }
-
-            return Task.CompletedTask;
         }
     }
 }

@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebChat.Domain.ChatModels;
 using WebChat.Domain.ChatService;
 
 namespace WebChat.Controllers
 {
-    
+    [Authorize]
     public class ChatController : Controller
     {
         private IChatService _chatService;

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace WebChat.DAL.Entities
 {
     public class Chat

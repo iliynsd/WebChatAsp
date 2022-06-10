@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,7 +50,7 @@ namespace WebChat.Domain.ChatService
 
         public async Task RemoveUserFromChat(RemoveUserFromChatModel model)
         {
-            var chatUser = await _chatUserRepository.Find(x => x.UserId == model.UserId && x.ChatId == model.ChatId);
+            var chatUser = await _chatUserRepository.GetAll(x => x.UserId == model.UserId && x.ChatId == model.ChatId).FirstOrDefaultAsync();
             await _chatUserRepository.Delete(chatUser.Id);
             await _chatUserRepository.SaveChangesAsync();
         }
@@ -59,5 +60,5 @@ namespace WebChat.Domain.ChatService
             var userChats = await Task.FromResult(_chatUserRepository.GetAll(x => x.UserId == userId).Select(i => i.ChatId).ToList());
             return await Task.FromResult(_chatRepository.GetAll().Where(i => userChats.Contains(i.Id)).Select(i => i.Name).ToList());
         }
-    } 
+    }
 }

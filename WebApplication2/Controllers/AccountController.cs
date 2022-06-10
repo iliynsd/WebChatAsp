@@ -1,15 +1,12 @@
-﻿using System;
-using System.Threading;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using WebChat.Domain.AuthenticationModels;
 using WebChat.Domain.UserServices;
 
 namespace WebChat.Controllers
 {
 
-    public class AccountController: Controller
+    public class AccountController : Controller
     {
         private IUserService _userService;
 
@@ -17,7 +14,7 @@ namespace WebChat.Controllers
         {
             _userService = userService;
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> LogIn([FromBody] LoginModel model)
         {
@@ -27,7 +24,7 @@ namespace WebChat.Controllers
             {
                 return BadRequest("Can't login");
             }
-            
+
             return Ok(authenticateResponse);
         }
 

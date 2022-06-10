@@ -23,7 +23,7 @@ namespace WebChat.Domain.UserServices
         public async Task<AuthenticateResponse> Authenticate(LoginModel model)
         {
             var user = await _userRepository.Get(model.UserName);
-            
+
             if (user == null)
             {
                 return null;
@@ -33,7 +33,7 @@ namespace WebChat.Domain.UserServices
             {
                 return null;
             }
-            
+
             var token = _identityService.GenerateJwtToken(user);
             return _mapper.Map<AuthenticateResponse>((user, token));
         }
@@ -47,5 +47,7 @@ namespace WebChat.Domain.UserServices
             var token = _identityService.GenerateJwtToken(user);
             return _mapper.Map<AuthenticateResponse>((user, token));
         }
+
+
     }
 }

@@ -18,7 +18,7 @@ namespace WebChat.DAL.PostgresRepositories
         public async Task Add(Message message) => await _dataContext.Messages.AddAsync(message);
 
         public async Task Delete(int messageId) => (await _dataContext.Messages.FirstOrDefaultAsync(i => i.Id == messageId)).IsActive = false;
-        
+
         public IQueryable<Message> GetAll() => _dataContext.Messages.Where(i => i.IsActive).AsQueryable();
 
         public IQueryable<Message> GetChatMessages(int chatId) => _dataContext.Messages.Where(i => i.IsActive).Where(i => i.ChatId == chatId).AsQueryable();

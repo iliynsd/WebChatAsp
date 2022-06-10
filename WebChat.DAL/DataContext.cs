@@ -10,7 +10,7 @@ namespace WebChat.DAL
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatAction> ChatActions { get; set; }
         public DbSet<ChatUser> ChatUser { get; set; }
-        
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 

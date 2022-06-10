@@ -1,7 +1,6 @@
-﻿
-
+﻿using OpenQA.Selenium.Chrome;
+using System.Linq;
 using System.Threading.Tasks;
-using WebChat.DAL;
 using WebChat.DAL.Repositories;
 
 namespace WebChat.Domain.BotServices
@@ -9,23 +8,24 @@ namespace WebChat.Domain.BotServices
     class GoToUrlBotService : IGoToUrlBotService
     {
         private const string BotUploaderName = "BotUploader";
-        private IChatRepository _chats;
         private IUserRepository _users;
+        private IChatUserRepository _chatUserRepository;
 
-        public GoToUrlBotService(IChatRepository chats, IUserRepository users)
+        public GoToUrlBotService(IChatUserRepository chatUserRepository, IUserRepository users)
         {
-            _chats = chats;
             _users = users;
+            _chatUserRepository = chatUserRepository;
         }
 
         public async Task GoToUrl(int chatId, string url)
         {
+            var chatUsers = _chatUserRepository.GetAll(x => x.ChatId == chatId).Select(x => x.UserId);
             var bot = await _users.Get(BotUploaderName);
-            var chat = await _chats.GetChatById(chatId);
 
-            //проверить находится ли бот в данном чате
-          //  new OpenQA.Selenium.Chrome.ChromeDriver().Navigate().GoToUrl(url);
-            
+            if (chatUsers.Contains(bot.Id))
+            {
+                new ChromeDriver().Navigate().GoToUrl(url);
+            }
         }
     }
 }

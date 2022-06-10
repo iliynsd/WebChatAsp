@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebChat.Domain.MessageModels;
 using WebChat.Domain.MessageServices;
 
 namespace WebChat.Controllers
 {
-    public class MessageController: Controller
+    [Authorize]
+    public class MessageController : Controller
     {
         private IMessageService _messageService;
 
@@ -40,7 +42,7 @@ namespace WebChat.Controllers
         {
             var messages = await _messageService.Get(chatId);
 
-            if(messages == null)
+            if (messages == null)
             {
                 return Ok("Chat Empty");
             }

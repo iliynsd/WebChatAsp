@@ -18,14 +18,13 @@ namespace WebChat.Domain.Bots
                 .Build();
             var services = new ServiceCollection();
 
-            services.AddSingleton<IMessageBotService, MessageBotService>((_) => new MessageBotService(serviceProvider.GetRequiredService<IMessageRepository>(), serviceProvider.GetRequiredService<IChatRepository>(), serviceProvider.GetRequiredService<IChatActionsRepository>(), serviceProvider.GetRequiredService<IUserRepository>()));
-            services.AddSingleton<IChatActionBotService, ChatActionBotService>((_) => new ChatActionBotService(serviceProvider.GetRequiredService<IChatRepository>(), serviceProvider.GetRequiredService<IChatActionsRepository>()));
-            services.AddSingleton<IGoToUrlBotService, GoToUrlBotService>((_) => new GoToUrlBotService(serviceProvider.GetRequiredService<IChatRepository>(), serviceProvider.GetRequiredService<IUserRepository>()));
-            services.AddSingleton<IMessageBot, ClockBot>();
-            services.AddSingleton<IMessageBot, BotUploader>();
+            services.AddScoped<IMessageBotService, MessageBotService>((_) => new MessageBotService(serviceProvider.GetRequiredService<IMessageRepository>(), serviceProvider.GetRequiredService<IChatUserRepository>(), serviceProvider.GetRequiredService<IUserRepository>()));
+            services.AddScoped<IGoToUrlBotService, GoToUrlBotService>((_) => new GoToUrlBotService(serviceProvider.GetRequiredService<IChatUserRepository>(), serviceProvider.GetRequiredService<IUserRepository>()));
+            services.AddScoped<IMessageBot, ClockBot>();
+            services.AddScoped<IMessageBot, BotUploader>();
 
             services.Configure<BotOptions>(configuration.GetSection(BotOptions.Threads).Bind);
-            services.AddSingleton<IBotsInvoker<IMessageBot, Message>, MessageBotInvoker>();
+            services.AddScoped<IBotsInvoker<IMessageBot, Message>, MessageBotInvoker>();
             provider = services.BuildServiceProvider();
         }
 

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
 
 namespace WebChat
 {
@@ -8,7 +7,7 @@ namespace WebChat
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();           
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateWebHostBuilder(string[] args) =>
